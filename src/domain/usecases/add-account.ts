@@ -5,7 +5,7 @@ export interface AddAccount {
 }
 
 export namespace AddAccount {
-	export type Params = Exclude<Account.Model, DatabaseDocument.Record>;
+	export type Params = Omit<Account.Model, keyof DatabaseDocument.Record>;
 
-	export type Result = void;
+	export type Result = Account.Model;
 }

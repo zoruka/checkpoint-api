@@ -6,8 +6,8 @@ export interface UpdateAccount {
 
 export namespace UpdateAccount {
 	export type Params = Partial<
-		Exclude<Account.Model, DatabaseDocument.Record>
-	> & { id: string };
+		Omit<Account.Model, keyof Omit<DatabaseDocument.Record, 'id'>>
+	>;
 
-	export type Result = void;
+	export type Result = Account.Model;
 }
