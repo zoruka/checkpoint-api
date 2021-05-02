@@ -19,7 +19,7 @@
 	"plugins": ["@typescript-eslint"],
 	"rules": {
 		"no-unused-vars": [
-			"warn",
+			"off",
 			{
 				"vars": "all",
 				"args": "after-used",
