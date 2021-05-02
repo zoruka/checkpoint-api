@@ -1,0 +1,28 @@
+{
+    "name": "checkpoint-api",
+    "version": "0.0.1",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "jest --passWithNoTests --runInBand --no-cache --silent",
+        "test:unit": "npm test -- --watch -c jest.unit.config.js",
+        "test:staged": "npm test -- --findRelatedTests",
+        "test:ci": "npm test -- --coverage"
+    },
+    "repository": {
+        "type": "git",
+        "url": "\u0016https://github.com/zoruka/checkpoint-api"
+    },
+    "author": "Felipe Mendes",
+    "license": "ISC",
+    "devDependencies": {
+        "eslint": "^7.25.0",
+        "faker": "^5.5.3",
+        "husky": "^6.0.0",
+        "jest": "^26.6.3",
+        "lint-staged": "^10.5.4",
+        "ts-jest": "^26.5.5",
+        "ts-node": "^9.1.1",
+        "typescript": "^4.2.4"
+    }
+}
