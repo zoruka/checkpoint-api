@@ -7,7 +7,7 @@ import { datatype } from 'faker';
 import { mockAccount } from '../../domain/mocks/account';
 
 export class AddAccountRepositorySpy implements AddAccountRepository {
-	result: AddAccountRepository.Result;
+	result?: AddAccountRepository.Result;
 
 	async add(
 		params: AddAccountRepository.Params
@@ -23,17 +23,23 @@ export class AddAccountRepositorySpy implements AddAccountRepository {
 }
 
 export class FindAccountRepositorySpy implements FindAccountRepository {
+	result?: FindAccountRepository.Result;
+
 	async findOne({
 		id,
 	}: FindAccountRepository.Params): Promise<FindAccountRepository.Result> {
-		return mockAccount({ id });
+		this.result = mockAccount({ id });
+		return this.result;
 	}
 }
 
 export class UpdateAccountRepositorySpy implements UpdateAccountRepository {
+	result?: UpdateAccountRepository.Result;
+
 	async update(
 		params: UpdateAccountRepository.Params
 	): Promise<UpdateAccountRepository.Result> {
-		return mockAccount(params);
+		this.result = mockAccount(params);
+		return this.result;
 	}
 }
