@@ -7,15 +7,18 @@ import { datatype } from 'faker';
 import { mockAccount } from '../../domain/mocks/account';
 
 export class AddAccountRepositorySpy implements AddAccountRepository {
+	result: AddAccountRepository.Result;
+
 	async add(
 		params: AddAccountRepository.Params
 	): Promise<AddAccountRepository.Result> {
-		return {
+		this.result = {
 			...params,
 			createdAt: new Date(),
 			updatedAt: new Date(),
 			id: datatype.uuid(),
 		};
+		return this.result;
 	}
 }
 
