@@ -16,6 +16,8 @@
     "author": "Felipe Mendes",
     "license": "ISC",
     "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^4.22.0",
+        "@typescript-eslint/parser": "^4.22.0",
         "eslint": "^7.25.0",
         "faker": "^5.5.3",
         "husky": "^6.0.0",
