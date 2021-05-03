@@ -1,9 +1,9 @@
 module.exports = {
-    coverageDirectory: 'coverage',
-    coverageProvider: 'v8',
-    roots: ['<rootDir>/tests'],
-    testEnvironment: 'node',
-    transform: {
-        '.+\\.ts$': 'ts-jest',
-    },
+	coverageDirectory: 'coverage',
+	coverageProvider: 'v8',
+	roots: ['<rootDir>/tests'],
+	preset: '@shelf/jest-mongodb',
+	transform: {
+		'.+\\.ts$': 'ts-jest',
+	},
 };
