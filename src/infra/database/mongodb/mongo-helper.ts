@@ -13,7 +13,7 @@ export const MongoHelper = {
 	},
 
 	async disconnect(): Promise<void> {
-		await this.client.close();
+		await this.client?.close();
 		this.client = null;
 	},
 
@@ -22,7 +22,7 @@ export const MongoHelper = {
 			if (!this.uri) throw new Error('Invalid URI');
 			await this.connect(this.uri);
 		}
-		return this.client.db().collection(name);
+		return this.client!.db().collection(name);
 	},
 
 	map: (data: any): any => {
