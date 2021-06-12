@@ -116,7 +116,7 @@ describe('DbAuthAccount', () => {
 		jest.spyOn(
 			findAccountByUsernameRepositorySpy,
 			'findByUsername'
-		).mockResolvedValueOnce(undefined);
+		).mockResolvedValueOnce(null);
 
 		const promise = sut.auth(authParams);
 

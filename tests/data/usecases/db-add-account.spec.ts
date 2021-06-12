@@ -27,11 +27,11 @@ const makeSut = () => {
 	jest.spyOn(
 		findAccountByEmailRepositorySpy,
 		'findByEmail'
-	).mockResolvedValue(undefined);
+	).mockResolvedValue(null);
 	jest.spyOn(
 		findAccountByUsernameRepositorySpy,
 		'findByUsername'
-	).mockResolvedValue(undefined);
+	).mockResolvedValue(null);
 
 	return {
 		sut,

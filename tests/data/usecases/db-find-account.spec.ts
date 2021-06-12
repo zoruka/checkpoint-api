@@ -45,7 +45,7 @@ describe('DbFindAccount', () => {
 	test('should throw if account could not be found', async () => {
 		const { sut, findAccountRepositorySpy } = makeSut();
 		jest.spyOn(findAccountRepositorySpy, 'findOne').mockResolvedValueOnce(
-			undefined
+			null
 		);
 
 		const promise = sut.findOne(updateParams);
