@@ -1,24 +1,29 @@
-import { AddAccountRepository } from '../../../../data/protocols';
+import { AccountError, DatabaseError } from '../../../../data/errors';
+import {
+	AddAccountRepository,
+	FindAccountRepository,
+} from '../../../../data/protocols';
 import { Account } from '../../../../domain/models';
 import { MongoHelper } from '../mongo-helper';
 
-export class MongoAccountRepository implements AddAccountRepository {
+export class MongoAccountRepository
+	implements AddAccountRepository, FindAccountRepository
+{
 	async add(
 		params: AddAccountRepository.Params
 	): Promise<AddAccountRepository.Result> {
 		const accountCollection = await MongoHelper.getCollection('accounts');
-
-		const newAccount: Omit<Account.Model, 'id'> = {
-			...params,
-			createdAt: new Date(),
-			updatedAt: new Date(),
-		};
-
-		const result = await accountCollection.insertOne(newAccount);
-
+		const result = await accountCollection.insertOne(params);
 		return {
-			...newAccount,
+			...params,
 			id: result.insertedId,
 		};
+	}
+
+	async findOne(
+		id: FindAccountRepository.Params
+	): Promise<FindAccountRepository.Result> {
+		const accountCollection = await MongoHelper.getCollection('accounts');
+		return accountCollection.findOne({ _id: id });
 	}
 }
