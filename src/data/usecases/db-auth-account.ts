@@ -5,13 +5,13 @@ import { AccountError } from '../errors';
 
 export class DbAuthAccount implements Auth {
 	constructor(
-		private readonly addAccountRepository: FindAccountByUsernameRepository,
+		private readonly findAccountByUsernameRepository: FindAccountByUsernameRepository,
 		private readonly hashComparer: HashComparer,
 		private readonly encrypter: Encrypter
 	) {}
 
 	async auth(params: Auth.Params): Promise<Auth.Result> {
-		const user = await this.addAccountRepository.findByUsername(
+		const user = await this.findAccountByUsernameRepository.findByUsername(
 			params.username
 		);
 
