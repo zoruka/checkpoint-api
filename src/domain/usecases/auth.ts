@@ -11,5 +11,6 @@ export namespace Auth {
 	export type Result = {
 		accessToken: string;
 		name: string;
+		userId: string;
 	};
 }

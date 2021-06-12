@@ -12,6 +12,6 @@ export namespace Account {
 		password: string;
 		email: string;
 		name: string;
-		avatarPath: string;
+		avatarPath: string | null;
 	}
 }

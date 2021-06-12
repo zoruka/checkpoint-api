@@ -5,9 +5,14 @@ export interface UpdateAccount {
 }
 
 export namespace UpdateAccount {
-	export type Params = Partial<
-		Omit<Account.Model, keyof Omit<DatabaseDocument.Record, 'id'>>
-	>;
+	export type Params = {
+		id: string;
+
+		email?: string;
+		username?: string;
+		password?: string;
+		name?: string;
+	};
 
 	export type Result = Account.Model;
 }
