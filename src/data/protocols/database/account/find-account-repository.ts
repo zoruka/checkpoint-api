@@ -1,12 +1,12 @@
-import { FindAccount } from '../../../../domain/usecases';
+import { Account } from '../../../../domain/models';
 
 export interface FindAccountRepository {
 	findOne: (
-		params: FindAccountRepository.Params
+		id: FindAccountRepository.Params
 	) => Promise<FindAccountRepository.Result>;
 }
 
 export namespace FindAccountRepository {
-	export type Params = FindAccount.Params;
-	export type Result = FindAccount.Result;
+	export type Params = string;
+	export type Result = Account.Model;
 }

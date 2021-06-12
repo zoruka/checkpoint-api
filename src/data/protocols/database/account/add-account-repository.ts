@@ -1,4 +1,4 @@
-import { AddAccount } from '../../../../domain/usecases';
+import { Account } from '../../../../domain/models';
 
 export interface AddAccountRepository {
 	add: (
@@ -7,6 +7,6 @@ export interface AddAccountRepository {
 }
 
 export namespace AddAccountRepository {
-	export type Params = AddAccount.Params;
-	export type Result = AddAccount.Result;
+	export type Params = Omit<Account.Model, 'id'>;
+	export type Result = Account.Model;
 }
