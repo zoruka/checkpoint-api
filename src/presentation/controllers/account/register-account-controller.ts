@@ -16,8 +16,12 @@ export class RegisterAccountController implements Http.Controller {
 	async handle(
 		request: RegisterAccountController.Request
 	): Promise<Http.Response> {
-		const badParams = await this.validation.validate(request);
-		if (badParams) return new HttpError.BadRequest(badParams);
+		try {
+			const badParams = await this.validation.validate(request);
+			if (badParams) return new HttpError.BadRequest(badParams);
+		} catch {
+			return new HttpError.Server();
+		}
 
 		try {
 			await this.addAccount.add({
@@ -34,7 +38,7 @@ export class RegisterAccountController implements Http.Controller {
 		}
 
 		try {
-			const authResult = this.auth.auth({
+			const authResult = await this.auth.auth({
 				username: request.username,
 				password: request.password,
 			});
