@@ -1,6 +1,6 @@
 import { DbAddAccount } from '../../../../data/usecases';
 import { AddAccount } from '../../../../domain/usecases';
-import { makeBcryptAdapter, makeMongoAccountRepository } from '../../adapters';
+import { makeBcryptAdapter, makeMongoAccountRepository } from '../../infras';
 
 export const makeAddAccount = (): AddAccount => {
 	const accountRepository = makeMongoAccountRepository();
