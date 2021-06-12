@@ -8,5 +8,5 @@ export interface FindAccountByEmailRepository {
 
 export namespace FindAccountByEmailRepository {
 	export type Params = string;
-	export type Result = Account.Model;
+	export type Result = Account.Model | undefined;
 }
