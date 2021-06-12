@@ -2,6 +2,7 @@ import { AccountError, DatabaseError } from '../../../../data/errors';
 import {
 	AddAccountRepository,
 	FindAccountByEmailRepository,
+	FindAccountByUsernameRepository,
 	FindAccountRepository,
 } from '../../../../data/protocols';
 import { Account } from '../../../../domain/models';
@@ -11,7 +12,8 @@ export class MongoAccountRepository
 	implements
 		AddAccountRepository,
 		FindAccountRepository,
-		FindAccountByEmailRepository
+		FindAccountByEmailRepository,
+		FindAccountByUsernameRepository
 {
 	async add(
 		params: AddAccountRepository.Params
@@ -36,5 +38,12 @@ export class MongoAccountRepository
 	): Promise<FindAccountByEmailRepository.Result> {
 		const accountCollection = await MongoHelper.getCollection('accounts');
 		return accountCollection.findOne({ email });
+	}
+
+	async findByUsername(
+		username: FindAccountByUsernameRepository.Params
+	): Promise<FindAccountByUsernameRepository.Result> {
+		const accountCollection = await MongoHelper.getCollection('accounts');
+		return accountCollection.findOne({ username });
 	}
 }
