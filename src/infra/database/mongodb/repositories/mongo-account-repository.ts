@@ -30,7 +30,7 @@ export class MongoAccountRepository
 		id: FindAccountRepository.Params
 	): Promise<FindAccountRepository.Result> {
 		const accountCollection = await MongoHelper.getCollection('accounts');
-		const account = accountCollection.findOne({ _id: id });
+		const account = await accountCollection.findOne({ _id: id });
 		return account && MongoHelper.map(account);
 	}
 
@@ -38,7 +38,7 @@ export class MongoAccountRepository
 		email: FindAccountByEmailRepository.Params
 	): Promise<FindAccountByEmailRepository.Result> {
 		const accountCollection = await MongoHelper.getCollection('accounts');
-		const account = accountCollection.findOne({ email });
+		const account = await accountCollection.findOne({ email });
 		return account && MongoHelper.map(account);
 	}
 
@@ -46,7 +46,7 @@ export class MongoAccountRepository
 		username: FindAccountByUsernameRepository.Params
 	): Promise<FindAccountByUsernameRepository.Result> {
 		const accountCollection = await MongoHelper.getCollection('accounts');
-		const account = accountCollection.findOne({ username });
+		const account = await accountCollection.findOne({ username });
 		return account && MongoHelper.map(account);
 	}
 
