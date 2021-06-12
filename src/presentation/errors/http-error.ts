@@ -22,6 +22,7 @@ export namespace HttpError {
 		pass(e: IdentifiedError): HttpError {
 			this.message = e.message;
 			this.name = e.name;
+			this.type = e.type;
 			return this;
 		}
 	}

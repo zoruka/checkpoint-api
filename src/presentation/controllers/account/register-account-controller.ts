@@ -42,7 +42,7 @@ export class RegisterAccountController implements Http.Controller {
 			return ok(authResult);
 		} catch (e) {
 			if (e instanceof IdentifiedError) {
-				return new HttpError.Unauthorized(e.message);
+				return new HttpError.Unauthorized();
 			} else {
 				return new HttpError.Server();
 			}
