@@ -1,7 +1,7 @@
 export namespace Http {
-	export type Response = {
+	export type Response<T = any> = {
 		statusCode: number;
-		body: any;
+		body: T;
 	};
 
 	export interface Controller<T = any> {

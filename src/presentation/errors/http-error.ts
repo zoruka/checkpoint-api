@@ -1,5 +1,6 @@
 import { IdentifiedError } from '../../domain/errors';
 import { Http } from '../protocols';
+import { Validation } from '../protocols/validation';
 
 export namespace HttpError {
 	abstract class HttpError extends IdentifiedError implements Http.Response {
@@ -17,10 +18,16 @@ export namespace HttpError {
 				message,
 			};
 		}
+
+		pass(e: IdentifiedError): HttpError {
+			this.message = e.message;
+			this.name = e.name;
+			return this;
+		}
 	}
 
 	export class BadRequest extends HttpError {
-		constructor(public readonly badParams: { [param: string]: string }) {
+		constructor(public readonly badParams: Validation.BadParams) {
 			super(400, 'BadRequest', 'Invalid request params');
 			this.body['badParams'] = badParams;
 		}
