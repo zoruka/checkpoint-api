@@ -1,10 +1,38 @@
-import { AuthAccountRepository } from '../protocols/database';
+import { FindAccountByUsernameRepository } from '../protocols/database';
 import { Auth } from '../../domain/usecases';
+import { Encrypter, HashComparer } from '../protocols';
+import { AccountError } from '../errors';
 
 export class DbAuthAccount implements Auth {
-	constructor(private readonly addAccountRepository: AuthAccountRepository) {}
+	constructor(
+		private readonly addAccountRepository: FindAccountByUsernameRepository,
+		private readonly hashComparer: HashComparer,
+		private readonly encrypter: Encrypter
+	) {}
 
 	async auth(params: Auth.Params): Promise<Auth.Result> {
-		return this.addAccountRepository.auth(params);
+		const user = await this.addAccountRepository.findByUsername(
+			params.username
+		);
+
+		const isValidPassword = await this.hashComparer.compare({
+			plaintext: params.password,
+			digest: user.password,
+		});
+
+		if (!isValidPassword)
+			throw new AccountError.InvalidCredentials(
+				'Invalid username or password'
+			);
+
+		const accessToken = await this.encrypter.encrypt({
+			plaintext: user.id,
+		});
+
+		return {
+			userId: user.id,
+			name: user.name,
+			accessToken,
+		};
 	}
 }

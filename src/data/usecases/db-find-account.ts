@@ -7,6 +7,6 @@ export class DbFindAccount implements FindAccount {
 	) {}
 
 	async findOne(params: FindAccount.Params): Promise<FindAccount.Result> {
-		return this.findAccountRepository.findOne(params);
+		return this.findAccountRepository.findOne(params.id);
 	}
 }
