@@ -47,11 +47,11 @@ export class UpdateAccountRepositorySpy implements UpdateAccountRepository {
 export class FindAccountByEmailRepositorySpy
 	implements FindAccountByEmailRepository
 {
-	result?: FindAccountRepository.Result;
+	result?: FindAccountByEmailRepository.Result;
 
 	async findByEmail(
-		email: FindAccountRepository.Params
-	): Promise<FindAccountRepository.Result> {
+		email: FindAccountByEmailRepository.Params
+	): Promise<FindAccountByEmailRepository.Result> {
 		this.result = mockAccount({ email });
 		return this.result;
 	}
@@ -60,11 +60,11 @@ export class FindAccountByEmailRepositorySpy
 export class FindAccountByUsernameRepositorySpy
 	implements FindAccountByUsernameRepository
 {
-	result?: FindAccountRepository.Result;
+	result?: FindAccountByUsernameRepository.Result;
 
 	async findByUsername(
-		username: FindAccountRepository.Params
-	): Promise<FindAccountRepository.Result> {
+		username: FindAccountByUsernameRepository.Params
+	): Promise<FindAccountByUsernameRepository.Result> {
 		this.result = mockAccount({ username });
 		return this.result;
 	}
