@@ -59,7 +59,8 @@ export class MongoAccountRepository
 			{ _id: id },
 			{
 				$set: updateParams,
-			}
+			},
+			{ returnOriginal: false }
 		);
 		return updatedAccount.value && MongoHelper.map(updatedAccount.value);
 	}
