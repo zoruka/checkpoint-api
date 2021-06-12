@@ -1,14 +1,10 @@
 import { datatype, random } from 'faker';
+import { DatabaseError } from '../../../src/data/errors';
 import { DbFindAccount } from '../../../src/data/usecases';
 import { throwError } from '../../utils';
 import { FindAccountRepositorySpy } from '../mocks/account-mocks';
 
-type SutObject = {
-	sut: DbFindAccount;
-	findAccountRepositorySpy: FindAccountRepositorySpy;
-};
-
-const makeSut = (): SutObject => {
+const makeSut = () => {
 	const findAccountRepositorySpy = new FindAccountRepositorySpy();
 	const sut = new DbFindAccount(findAccountRepositorySpy);
 	return {
@@ -18,23 +14,21 @@ const makeSut = (): SutObject => {
 };
 
 describe('DbFindAccount', () => {
+	const updateParams = { id: datatype.uuid() };
+
 	test('should call find with the right params', async () => {
 		const { sut, findAccountRepositorySpy } = makeSut();
 
-		const spy = spyOn(findAccountRepositorySpy, 'findOne');
+		const spy = jest.spyOn(findAccountRepositorySpy, 'findOne');
 
-		const id = datatype.uuid();
-
-		await sut.findOne({ id });
-		expect(spy).toBeCalledWith({ id });
+		await sut.findOne(updateParams);
+		expect(spy).toBeCalledWith(updateParams.id);
 	});
 
 	test('should return a database document', async () => {
 		const { sut, findAccountRepositorySpy } = makeSut();
 
-		const id = datatype.uuid();
-
-		const result = await sut.findOne({ id });
+		const result = await sut.findOne(updateParams);
 		expect(result).toEqual(findAccountRepositorySpy.result);
 	});
 
@@ -44,18 +38,17 @@ describe('DbFindAccount', () => {
 			throwError
 		);
 
-		const id = datatype.uuid();
-
-		const promise = sut.findOne({ id });
+		const promise = sut.findOne(updateParams);
 		await expect(promise).rejects.toThrow();
 	});
 
-	test('should return a database document with same id', async () => {
-		const { sut } = makeSut();
+	test('should throw if account could not be found', async () => {
+		const { sut, findAccountRepositorySpy } = makeSut();
+		jest.spyOn(findAccountRepositorySpy, 'findOne').mockResolvedValueOnce(
+			undefined
+		);
 
-		const id = datatype.uuid();
-
-		const result = await sut.findOne({ id });
-		expect(result.id).toEqual(id);
+		const promise = sut.findOne(updateParams);
+		await expect(promise).rejects.toThrowError(DatabaseError.NotFound);
 	});
 });
