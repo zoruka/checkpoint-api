@@ -8,6 +8,8 @@ export interface UpdateAccountRepository {
 }
 
 export namespace UpdateAccountRepository {
-	export type Params = Required<UpdateAccount.Params>;
+	export type Params = Required<UpdateAccount.Params> & {
+		updatedAt: Date;
+	};
 	export type Result = Account.Model;
 }

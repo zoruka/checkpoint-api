@@ -53,6 +53,7 @@ export class DbUpdateAccount implements UpdateAccount {
 			username: params.username || currentAccount.username,
 			password: newPassword || currentAccount.password,
 			name: params.name || currentAccount.name,
+			updatedAt: new Date(),
 		});
 	}
 }
