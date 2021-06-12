@@ -7,7 +7,7 @@ import {
 } from '../../../src/data/protocols';
 
 export class HasherSpy implements Hasher {
-	result: Hasher.Result;
+	result?: Hasher.Result;
 
 	async hash(): Promise<Hasher.Result> {
 		this.result = datatype.uuid();
@@ -16,7 +16,7 @@ export class HasherSpy implements Hasher {
 }
 
 export class HashComparerSpy implements HashComparer {
-	result: HashComparer.Result;
+	result?: HashComparer.Result;
 	async compare(): Promise<HashComparer.Result> {
 		this.result = true;
 		return this.result;
@@ -24,7 +24,7 @@ export class HashComparerSpy implements HashComparer {
 }
 
 export class EncrypterSpy implements Encrypter {
-	result: Encrypter.Result;
+	result?: Encrypter.Result;
 
 	async encrypt(): Promise<Encrypter.Result> {
 		this.result = datatype.string(32);
@@ -33,7 +33,7 @@ export class EncrypterSpy implements Encrypter {
 }
 
 export class DecrypterSpy implements Decrypter {
-	result: Decrypter.Result;
+	result?: Decrypter.Result;
 
 	async decrypt(): Promise<Decrypter.Result> {
 		this.result = {
