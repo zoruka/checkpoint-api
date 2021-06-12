@@ -30,21 +30,24 @@ export class MongoAccountRepository
 		id: FindAccountRepository.Params
 	): Promise<FindAccountRepository.Result> {
 		const accountCollection = await MongoHelper.getCollection('accounts');
-		return accountCollection.findOne({ _id: id });
+		const account = accountCollection.findOne({ _id: id });
+		return account && MongoHelper.map(account);
 	}
 
 	async findByEmail(
 		email: FindAccountByEmailRepository.Params
 	): Promise<FindAccountByEmailRepository.Result> {
 		const accountCollection = await MongoHelper.getCollection('accounts');
-		return accountCollection.findOne({ email });
+		const account = accountCollection.findOne({ email });
+		return account && MongoHelper.map(account);
 	}
 
 	async findByUsername(
 		username: FindAccountByUsernameRepository.Params
 	): Promise<FindAccountByUsernameRepository.Result> {
 		const accountCollection = await MongoHelper.getCollection('accounts');
-		return accountCollection.findOne({ username });
+		const account = accountCollection.findOne({ username });
+		return account && MongoHelper.map(account);
 	}
 
 	async update({
@@ -58,6 +61,6 @@ export class MongoAccountRepository
 				$set: updateParams,
 			}
 		);
-		return updatedAccount.value;
+		return updatedAccount.value && MongoHelper.map(updatedAccount.value);
 	}
 }
