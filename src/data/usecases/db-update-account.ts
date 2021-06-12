@@ -40,9 +40,10 @@ export class DbUpdateAccount implements UpdateAccount {
 			if (foundAccount) throw new AccountError.UsernameConflict();
 		}
 
-		if (params.password) {
-			params.password = await this.hasher.hash({
-				plaintext: params.password,
+		let newPassword = params.password;
+		if (newPassword) {
+			newPassword = await this.hasher.hash({
+				plaintext: newPassword,
 			});
 		}
 
@@ -50,7 +51,7 @@ export class DbUpdateAccount implements UpdateAccount {
 			id: params.id,
 			email: params.email || currentAccount.email,
 			username: params.username || currentAccount.username,
-			password: params.password || currentAccount.password,
+			password: newPassword || currentAccount.password,
 			name: params.name || currentAccount.name,
 		});
 	}
