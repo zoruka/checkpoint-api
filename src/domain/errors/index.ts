@@ -1,1 +1,1 @@
-export * from './base-error';
+export * from './identified-error';
