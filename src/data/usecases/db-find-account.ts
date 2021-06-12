@@ -1,5 +1,6 @@
 import { FindAccountRepository } from '../protocols/database';
 import { FindAccount } from '../../domain/usecases';
+import { DatabaseError } from '../errors';
 
 export class DbFindAccount implements FindAccount {
 	constructor(
@@ -7,6 +8,10 @@ export class DbFindAccount implements FindAccount {
 	) {}
 
 	async findOne(params: FindAccount.Params): Promise<FindAccount.Result> {
-		return this.findAccountRepository.findOne(params.id);
+		const findResult = await this.findAccountRepository.findOne(params.id);
+
+		if (!findResult) throw new DatabaseError.NotFound('Id not found');
+
+		return findResult;
 	}
 }

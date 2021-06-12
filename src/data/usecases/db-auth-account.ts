@@ -15,6 +15,11 @@ export class DbAuthAccount implements Auth {
 			params.username
 		);
 
+		if (!user)
+			throw new AccountError.InvalidCredentials(
+				'Invalid username or password'
+			);
+
 		const isValidPassword = await this.hashComparer.compare({
 			plaintext: params.password,
 			digest: user.password,
