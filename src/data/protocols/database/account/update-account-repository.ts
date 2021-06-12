@@ -1,4 +1,5 @@
 import { Account } from '../../../../domain/models';
+import { UpdateAccount } from '../../../../domain/usecases';
 
 export interface UpdateAccountRepository {
 	update: (
@@ -7,6 +8,6 @@ export interface UpdateAccountRepository {
 }
 
 export namespace UpdateAccountRepository {
-	export type Params = Account.Model;
+	export type Params = Required<UpdateAccount.Params>;
 	export type Result = Account.Model;
 }

@@ -1,11 +1,10 @@
-import { AccountError, DatabaseError } from '../../../../data/errors';
 import {
 	AddAccountRepository,
 	FindAccountByEmailRepository,
 	FindAccountByUsernameRepository,
 	FindAccountRepository,
+	UpdateAccountRepository,
 } from '../../../../data/protocols';
-import { Account } from '../../../../domain/models';
 import { MongoHelper } from '../mongo-helper';
 
 export class MongoAccountRepository
@@ -13,7 +12,8 @@ export class MongoAccountRepository
 		AddAccountRepository,
 		FindAccountRepository,
 		FindAccountByEmailRepository,
-		FindAccountByUsernameRepository
+		FindAccountByUsernameRepository,
+		UpdateAccountRepository
 {
 	async add(
 		params: AddAccountRepository.Params
@@ -45,5 +45,19 @@ export class MongoAccountRepository
 	): Promise<FindAccountByUsernameRepository.Result> {
 		const accountCollection = await MongoHelper.getCollection('accounts');
 		return accountCollection.findOne({ username });
+	}
+
+	async update({
+		id,
+		...updateParams
+	}: UpdateAccountRepository.Params): Promise<UpdateAccountRepository.Result> {
+		const accountCollection = await MongoHelper.getCollection('accounts');
+		const updatedAccount = await accountCollection.findOneAndUpdate(
+			{ _id: id },
+			{
+				$set: updateParams,
+			}
+		);
+		return updatedAccount.value;
 	}
 }

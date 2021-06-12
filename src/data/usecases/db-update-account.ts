@@ -47,12 +47,7 @@ export class DbUpdateAccount implements UpdateAccount {
 		}
 
 		return this.updateAccountRepository.update({
-			id: currentAccount.id,
-			access: currentAccount.access,
-			avatarPath: currentAccount.avatarPath,
-			createdAt: currentAccount.createdAt,
-			updatedAt: new Date(),
-
+			id: params.id,
 			email: params.email || currentAccount.email,
 			username: params.username || currentAccount.username,
 			password: params.password || currentAccount.password,
