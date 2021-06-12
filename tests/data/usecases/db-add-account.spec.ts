@@ -128,10 +128,8 @@ describe('DbAddAccount', () => {
 	test('should call add with the right params', async () => {
 		const { sut, addAccountRepositorySpy, hasherSpy } = makeSut();
 
-		const dateMock = new Date(1466424490000);
-		jest.spyOn(global, 'Date').mockImplementationOnce(
-			() => dateMock as any
-		);
+		jest.useFakeTimers('modern');
+		jest.setSystemTime(new Date());
 
 		const spy = jest.spyOn(addAccountRepositorySpy, 'add');
 
@@ -143,9 +141,11 @@ describe('DbAddAccount', () => {
 			password: hasherSpy.result,
 			username: addParams.username,
 			avatarPath: null,
-			createdAt: dateMock,
-			updatedAt: dateMock,
+			createdAt: new Date(),
+			updatedAt: new Date(),
 		});
+
+		jest.useRealTimers();
 	});
 
 	test('should return a database document', async () => {

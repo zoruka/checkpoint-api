@@ -45,13 +45,21 @@ const makeSut = () => {
 };
 
 describe('DbUpdateAccount', () => {
+	jest.useFakeTimers('modern');
+	jest.setSystemTime(new Date());
+
 	const updateParams = {
 		id: datatype.uuid(),
+		updatedAt: new Date(),
 		email: internet.email(),
 		name: name.findName(),
 		username: internet.userName(),
 		password: internet.password(),
 	};
+
+	afterAll(() => {
+		jest.useRealTimers();
+	});
 
 	test('should call findByEmail with the right params', async () => {
 		const { sut, findAccountByEmailRepositorySpy } = makeSut();
