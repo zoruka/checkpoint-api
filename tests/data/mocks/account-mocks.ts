@@ -1,5 +1,7 @@
 import {
 	AddAccountRepository,
+	FindAccountByEmailRepository,
+	FindAccountByUsernameRepository,
 	FindAccountRepository,
 	UpdateAccountRepository,
 } from '../../../src/data/protocols/database';
@@ -14,8 +16,6 @@ export class AddAccountRepositorySpy implements AddAccountRepository {
 	): Promise<AddAccountRepository.Result> {
 		this.result = {
 			...params,
-			createdAt: new Date(),
-			updatedAt: new Date(),
 			id: datatype.uuid(),
 		};
 		return this.result;
@@ -25,9 +25,9 @@ export class AddAccountRepositorySpy implements AddAccountRepository {
 export class FindAccountRepositorySpy implements FindAccountRepository {
 	result?: FindAccountRepository.Result;
 
-	async findOne({
-		id,
-	}: FindAccountRepository.Params): Promise<FindAccountRepository.Result> {
+	async findOne(
+		id: FindAccountRepository.Params
+	): Promise<FindAccountRepository.Result> {
 		this.result = mockAccount({ id });
 		return this.result;
 	}
@@ -40,6 +40,32 @@ export class UpdateAccountRepositorySpy implements UpdateAccountRepository {
 		params: UpdateAccountRepository.Params
 	): Promise<UpdateAccountRepository.Result> {
 		this.result = mockAccount(params);
+		return this.result;
+	}
+}
+
+export class FindAccountByEmailRepositorySpy
+	implements FindAccountByEmailRepository
+{
+	result?: FindAccountRepository.Result;
+
+	async findByEmail(
+		email: FindAccountRepository.Params
+	): Promise<FindAccountRepository.Result> {
+		this.result = mockAccount({ email });
+		return this.result;
+	}
+}
+
+export class FindAccountByUsernameRepositorySpy
+	implements FindAccountByUsernameRepository
+{
+	result?: FindAccountRepository.Result;
+
+	async findByUsername(
+		username: FindAccountRepository.Params
+	): Promise<FindAccountRepository.Result> {
+		this.result = mockAccount({ username });
 		return this.result;
 	}
 }
