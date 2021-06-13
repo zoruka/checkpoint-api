@@ -1,5 +1,10 @@
 import { datatype, name } from 'faker';
-import { AddAccount, Auth, FindAccount } from '../../../src/domain/usecases';
+import {
+	AddAccount,
+	Auth,
+	AuthByToken,
+	FindAccount,
+} from '../../../src/domain/usecases';
 import { mockAccount } from '../../domain/mocks';
 
 export class AuthSpy implements Auth {
@@ -10,6 +15,14 @@ export class AuthSpy implements Auth {
 			name: name.findName(),
 			userId: datatype.uuid(),
 		};
+		return this.result;
+	}
+}
+
+export class AuthByTokenSpy implements AuthByToken {
+	result?: AuthByToken.Result;
+	async authByToken(): Promise<AuthByToken.Result> {
+		this.result = mockAccount();
 		return this.result;
 	}
 }
