@@ -1,7 +1,7 @@
-import { FindAccountRepository } from '../protocols/database';
-import { AuthByToken } from '../../domain/usecases';
-import { Decrypter } from '../protocols';
-import { AccountError } from '../errors';
+import { FindAccountRepository } from '../../protocols/database';
+import { AuthByToken } from '../../../domain/usecases';
+import { Decrypter } from '../../protocols';
+import { AccountError } from '../../errors';
 
 export class DbAuthByToken implements AuthByToken {
 	constructor(

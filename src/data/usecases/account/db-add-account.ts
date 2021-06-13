@@ -2,11 +2,10 @@ import {
 	AddAccountRepository,
 	FindAccountByEmailRepository,
 	FindAccountByUsernameRepository,
-} from '../protocols/database';
-import { AddAccount } from '../../domain/usecases';
-import { Hasher } from '../protocols';
-import { AccountError } from '../errors';
-import { Account } from '../../domain/models';
+} from '../../protocols/database';
+import { AddAccount } from '../../../domain/usecases';
+import { Hasher } from '../../protocols';
+import { AccountError } from '../../errors';
 
 export class DbAddAccount implements AddAccount {
 	constructor(

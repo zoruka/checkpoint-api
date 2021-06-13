@@ -1,7 +1,7 @@
-import { FindAccountByUsernameRepository } from '../protocols/database';
-import { Auth } from '../../domain/usecases';
-import { Encrypter, HashComparer } from '../protocols';
-import { AccountError } from '../errors';
+import { FindAccountByUsernameRepository } from '../../protocols/database';
+import { Auth } from '../../../domain/usecases';
+import { Encrypter, HashComparer } from '../../protocols';
+import { AccountError } from '../../errors';
 
 export class DbAuthAccount implements Auth {
 	constructor(

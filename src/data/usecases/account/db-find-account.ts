@@ -1,6 +1,6 @@
-import { FindAccountRepository } from '../protocols/database';
-import { FindAccount } from '../../domain/usecases';
-import { DatabaseError } from '../errors';
+import { FindAccountRepository } from '../../protocols/database';
+import { FindAccount } from '../../../domain/usecases';
+import { DatabaseError } from '../../errors';
 
 export class DbFindAccount implements FindAccount {
 	constructor(

@@ -3,10 +3,10 @@ import {
 	FindAccountByUsernameRepository,
 	FindAccountRepository,
 	UpdateAccountRepository,
-} from '../protocols/database';
-import { UpdateAccount } from '../../domain/usecases';
-import { AccountError, DatabaseError } from '../errors';
-import { Hasher } from '../protocols';
+} from '../../protocols/database';
+import { UpdateAccount } from '../../../domain/usecases';
+import { AccountError, DatabaseError } from '../../errors';
+import { Hasher } from '../../protocols';
 
 export class DbUpdateAccount implements UpdateAccount {
 	constructor(
