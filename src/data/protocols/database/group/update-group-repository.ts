@@ -1,4 +1,4 @@
-import { Account } from '../../../../domain/models';
+import { Group } from '../../../../domain/models';
 import { UpdateGroup } from '../../../../domain/usecases';
 
 export interface UpdateGroupRepository {
@@ -11,5 +11,5 @@ export namespace UpdateGroupRepository {
 	export type Params = Required<UpdateGroup.Params> & {
 		updatedAt: Date;
 	};
-	export type Result = Account.Model;
+	export type Result = Group.Model;
 }

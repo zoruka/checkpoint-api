@@ -6,6 +6,7 @@ export interface UpdateGroup {
 
 export namespace UpdateGroup {
 	export type Params = {
+		id: string;
 		adminId?: string;
 		name?: string;
 	};
