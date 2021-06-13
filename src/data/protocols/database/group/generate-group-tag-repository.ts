@@ -1,5 +1,3 @@
-import { Group } from '../../../../domain/models';
-
 export interface GenerateGroupTagRepository {
 	generateTag: () => Promise<GenerateGroupTagRepository.Result>;
 }
