@@ -14,7 +14,7 @@ export class AddGroupBindingRepositorySpy implements AddGroupBindingRepository {
 	result?: AddGroupBindingRepository.Result;
 
 	async addBinding(): Promise<AddGroupBindingRepository.Result> {
-		this.result = mockGroup();
+		this.result = mockGroupBinding();
 		return this.result;
 	}
 }

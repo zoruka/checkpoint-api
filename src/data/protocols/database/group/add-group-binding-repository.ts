@@ -8,5 +8,5 @@ export interface AddGroupBindingRepository {
 
 export namespace AddGroupBindingRepository {
 	export type Params = Omit<Group.Binding, 'id'>;
-	export type Result = Group.Model;
+	export type Result = Group.Binding;
 }
