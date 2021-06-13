@@ -21,7 +21,7 @@ export class DbAddGroup implements AddGroup {
 		);
 
 		if (!adminAccount)
-			throw new DatabaseError.NotFound('User id not found');
+			throw new DatabaseError.NotFound('Account id not found');
 
 		const tag = await this.generateGroupTagRepository.generateTag();
 		const date = new Date();
