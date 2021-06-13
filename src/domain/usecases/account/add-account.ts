@@ -1,4 +1,4 @@
-import { Account, DatabaseDocument } from '../models';
+import { Account, DatabaseDocument } from '../../models';
 
 export interface AddAccount {
 	add: (params: AddAccount.Params) => Promise<AddAccount.Result>;

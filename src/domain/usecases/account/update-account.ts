@@ -1,4 +1,4 @@
-import { Account, DatabaseDocument } from '../models';
+import { Account, DatabaseDocument } from '../../models';
 
 export interface UpdateAccount {
 	update: (params: UpdateAccount.Params) => Promise<UpdateAccount.Result>;

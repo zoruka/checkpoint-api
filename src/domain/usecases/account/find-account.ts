@@ -1,4 +1,4 @@
-import { Account, DatabaseDocument } from '../models';
+import { Account } from '../../models';
 
 export interface FindAccount {
 	findOne: (params: FindAccount.Params) => Promise<FindAccount.Result>;
