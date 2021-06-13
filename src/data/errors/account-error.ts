@@ -20,4 +20,10 @@ export namespace AccountError {
 			super(type, 'UsernameConflict', 'Username already in use');
 		}
 	}
+
+	export class InvalidToken extends IdentifiedError {
+		constructor(message: string = 'Invalid token') {
+			super(type, 'InvalidToken', message);
+		}
+	}
 }
