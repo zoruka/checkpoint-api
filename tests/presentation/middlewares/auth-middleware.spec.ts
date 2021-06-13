@@ -65,12 +65,14 @@ describe('AuthMiddleware', () => {
 		expect(result).toBeInstanceOf(HttpError.Unauthorized);
 	});
 
-	test('should return an account', async () => {
+	test('should return an account id', async () => {
 		const { sut, authByTokenSpy } = makeSut();
 
 		const result = await sut.handle(request);
 
 		expect(result.statusCode).toEqual(200);
-		expect(result.body).toMatchObject({ account: authByTokenSpy.result });
+		expect(result.body).toMatchObject({
+			accountId: authByTokenSpy.result?.id,
+		});
 	});
 });
