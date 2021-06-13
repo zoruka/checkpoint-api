@@ -1,15 +1,13 @@
-import { Decrypter } from '../../data/protocols';
 import { IdentifiedError } from '../../domain/errors';
 import { Account } from '../../domain/models';
-import { FindAccount } from '../../domain/usecases';
+import { AuthByToken } from '../../domain/usecases';
 import { HttpError } from '../errors';
 import { ok } from '../helpers';
 import { Http } from '../protocols';
 
 export class AuthMiddleware implements Http.Middleware {
 	constructor(
-		private readonly decrypter: Decrypter,
-		private readonly findAccount: FindAccount,
+		private readonly authByToken: AuthByToken,
 		private readonly access: Account.Access
 	) {}
 
@@ -17,11 +15,8 @@ export class AuthMiddleware implements Http.Middleware {
 		try {
 			const { accessToken } = request;
 			if (accessToken) {
-				const { payload } = await this.decrypter.decrypt({
-					ciphertext: accessToken,
-				});
-				const account = await this.findAccount.findOne({ id: payload });
-				if (account.access === this.access) {
+				const account = await this.authByToken.authByToken(accessToken);
+				if (account && account.access === this.access) {
 					return ok({ account });
 				}
 			}
