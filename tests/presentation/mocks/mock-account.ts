@@ -4,6 +4,7 @@ import {
 	Auth,
 	AuthByToken,
 	FindAccount,
+	UpdateAccount,
 } from '../../../src/domain/usecases';
 import { mockAccount } from '../../domain/mocks';
 
@@ -38,6 +39,14 @@ export class AddAccountSpy implements AddAccount {
 export class FindAccountSpy implements FindAccount {
 	result?: FindAccount.Result;
 	async findOne(): Promise<FindAccount.Result> {
+		this.result = mockAccount();
+		return this.result;
+	}
+}
+
+export class UpdateAccountSpy implements UpdateAccount {
+	result?: UpdateAccount.Result;
+	async update(): Promise<UpdateAccount.Result> {
 		this.result = mockAccount();
 		return this.result;
 	}
