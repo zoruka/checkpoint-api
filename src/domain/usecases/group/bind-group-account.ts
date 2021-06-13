@@ -1,5 +1,3 @@
-import { Group, DatabaseDocument } from '../../models';
-
 export interface BindGroupAccount {
 	bindAccountId: (
 		params: BindGroupAccount.Params
@@ -10,6 +8,7 @@ export namespace BindGroupAccount {
 	export type Params = {
 		accountId: string;
 		groupId: string;
+		bind: boolean;
 	};
 
 	export type Result = void;

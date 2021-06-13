@@ -9,7 +9,7 @@ export interface BinderGroupRepository {
 export namespace BinderGroupRepository {
 	export type Params = {
 		groupId: string;
-		userId: string;
+		accountId: string;
 		bind: boolean;
 	};
 	export type Result = Group.Model;
