@@ -1,3 +1,4 @@
+import { ObjectID } from 'mongodb';
 import {
 	AddAccountRepository,
 	FindAccountByEmailRepository,
@@ -30,7 +31,9 @@ export class MongoAccountRepository
 		id: FindAccountRepository.Params
 	): Promise<FindAccountRepository.Result> {
 		const accountCollection = await MongoHelper.getCollection('accounts');
-		const account = await accountCollection.findOne({ _id: id });
+		const account = await accountCollection.findOne({
+			_id: new ObjectID(id),
+		});
 		return account && MongoHelper.map(account);
 	}
 
@@ -56,7 +59,7 @@ export class MongoAccountRepository
 	}: UpdateAccountRepository.Params): Promise<UpdateAccountRepository.Result> {
 		const accountCollection = await MongoHelper.getCollection('accounts');
 		const updatedAccount = await accountCollection.findOneAndUpdate(
-			{ _id: id },
+			{ _id: new ObjectID(id) },
 			{
 				$set: updateParams,
 			},

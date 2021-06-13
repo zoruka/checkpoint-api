@@ -1,3 +1,4 @@
+import { datatype, random } from 'faker';
 import { Collection } from 'mongodb';
 import {
 	MongoAccountRepository,
@@ -35,7 +36,7 @@ describe('MongoAccountRepository', () => {
 	describe('findOne()', () => {
 		test('should return undefined if not found', async () => {
 			const sut = makeSut();
-			const account = await sut.findOne('account_id');
+			const account = await sut.findOne('60c594662feb18ddf66c47ab');
 			expect(account).toBeNull();
 		});
 

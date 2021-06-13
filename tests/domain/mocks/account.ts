@@ -5,7 +5,7 @@ import { AddAccount } from '../../../src/domain/usecases';
 export const mockAccount = (
 	params: Partial<Account.Model> = {}
 ): Account.Model => ({
-	id: params.id || datatype.uuid(),
+	id: params.id || random.alphaNumeric(24),
 	access: params.access || Account.Access.Profile,
 	avatarPath: params.avatarPath || system.filePath(),
 	createdAt: params.createdAt || new Date(),
