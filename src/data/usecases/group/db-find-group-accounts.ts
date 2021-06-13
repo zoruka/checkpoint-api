@@ -25,7 +25,7 @@ export class DbFindGroupAccounts implements FindGroupAccounts {
 		if (!groupBinding)
 			throw new DatabaseError.NotFound('GroupBinding id not found');
 
-		const toFetchIds = Object.entries(groupBinding.users).reduce(
+		const toFetchIds = Object.entries(groupBinding.accounts).reduce(
 			(ids, [id, condition]) => (condition ? [...ids, id] : ids),
 			[] as string[]
 		);

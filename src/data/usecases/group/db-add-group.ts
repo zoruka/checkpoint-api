@@ -29,7 +29,7 @@ export class DbAddGroup implements AddGroup {
 		const groupBinding = await this.addGroupBindingRepository.addBinding({
 			createdAt: date,
 			updatedAt: date,
-			users: {},
+			accounts: {},
 		});
 
 		const result = await this.addGroupRepository.add({

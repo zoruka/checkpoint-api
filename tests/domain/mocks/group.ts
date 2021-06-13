@@ -17,7 +17,7 @@ export const mockGroupBinding = (
 	id: params.id || random.alphaNumeric(24),
 	createdAt: params.createdAt || new Date(),
 	updatedAt: params.updatedAt || new Date(),
-	users: {
+	accounts: {
 		[random.alphaNumeric(25)]: new Date(),
 		[random.alphaNumeric(25)]: null,
 	},
