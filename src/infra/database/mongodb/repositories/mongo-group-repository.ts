@@ -90,12 +90,15 @@ export class MongoGroupRepository
 		return group && MongoHelper.map(group);
 	}
 
-	async find(searchValue: FindGroups.Params): Promise<FindGroups.Result> {
+	async find(tag: FindGroups.Params): Promise<FindGroups.Result> {
 		const groupsCollection = await MongoHelper.getCollection('groups');
 		const group = await groupsCollection.findOne({
-			tag: new RegExp(`.*${searchValue}.*`),
+			tag,
 		});
-		return group && MongoHelper.map(group);
+
+		const result: any[] = [];
+		if (group) result.push(MongoHelper.map(group));
+		return result;
 	}
 
 	async update({
@@ -117,7 +120,7 @@ export class MongoGroupRepository
 		const bindingsCollection = await MongoHelper.getCollection(
 			'group-bindings'
 		);
-		const length = bindingsCollection.countDocuments();
+		const length = await bindingsCollection.countDocuments();
 		return `000000${length}`.slice(-6);
 	}
 }
