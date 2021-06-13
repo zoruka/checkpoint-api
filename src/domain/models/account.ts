@@ -14,4 +14,6 @@ export namespace Account {
 		name: string;
 		avatarPath: string | null;
 	}
+
+	export type Short = Pick<Account.Model, 'name' | 'username' | 'id'>;
 }

@@ -9,5 +9,5 @@ export interface FindGroupAccounts {
 export namespace FindGroupAccounts {
 	export type Params = string;
 
-	export type Result = Account.Model[];
+	export type Result = Account.Short[];
 }
