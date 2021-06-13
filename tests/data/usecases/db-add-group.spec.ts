@@ -87,7 +87,7 @@ describe('DbAddGroup', () => {
 		expect(spy).toBeCalledWith({
 			createdAt: new Date(),
 			updatedAt: new Date(),
-			users: {},
+			accounts: {},
 		});
 
 		jest.useRealTimers();
