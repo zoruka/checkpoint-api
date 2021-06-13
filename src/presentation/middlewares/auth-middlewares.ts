@@ -17,7 +17,7 @@ export class AuthMiddleware implements Http.Middleware {
 			if (accessToken) {
 				const account = await this.authByToken.authByToken(accessToken);
 				if (account && account.access === this.access) {
-					return ok({ account });
+					return ok({ accountId: account.id });
 				}
 			}
 
