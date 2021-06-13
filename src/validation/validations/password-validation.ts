@@ -8,6 +8,7 @@ export class PasswordValidation implements Validation {
 	) {}
 
 	async validate(input: any): Validation.Result {
+		if (input[this.objectKey] === undefined) return;
 		const error = await this.validator.validatePassword(
 			input[this.objectKey]
 		);

@@ -8,6 +8,7 @@ export class EmailValidation implements Validation {
 	) {}
 
 	async validate(input: any): Validation.Result {
+		if (input[this.objectKey] === undefined) return;
 		const error = await this.emailValidator.validateEmail(
 			input[this.objectKey]
 		);
