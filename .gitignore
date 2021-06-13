@@ -2,3 +2,4 @@ node_modules
 dist
 globalConfig.json
 coverage
+Dockerfile
