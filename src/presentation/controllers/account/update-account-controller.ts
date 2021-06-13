@@ -1,4 +1,5 @@
 import { IdentifiedError } from '../../../domain/errors';
+import { Account } from '../../../domain/models';
 import { UpdateAccount } from '../../../domain/usecases';
 import { HttpError } from '../../errors';
 import { ok } from '../../helpers';
@@ -12,12 +13,12 @@ export class UpdateAccountController implements Http.Controller {
 
 	async handle(
 		request: UpdateAccountController.Request
-	): Promise<Http.Response> {
+	): Promise<Http.Response<UpdateAccountController.Response>> {
 		try {
 			const badParams = await this.validation.validate(request);
 			if (badParams) return new HttpError.BadRequest(badParams);
 
-			const authResult = await this.updateAccount.update({
+			const { password, ...result } = await this.updateAccount.update({
 				id: request.accountId,
 				email: request.email,
 				name: request.name,
@@ -25,7 +26,7 @@ export class UpdateAccountController implements Http.Controller {
 				username: request.username,
 			});
 
-			return ok(authResult);
+			return ok(result);
 		} catch (e) {
 			if (e instanceof IdentifiedError) {
 				return new HttpError.Forbidden().pass(e);
@@ -45,4 +46,6 @@ export namespace UpdateAccountController {
 		password?: string;
 		name?: string;
 	};
+
+	export type Response = Omit<Account.Model, 'password'>;
 }
