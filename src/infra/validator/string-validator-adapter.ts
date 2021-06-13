@@ -23,6 +23,6 @@ export class UsernameValidatorAdapter implements UsernameValidator {
 export class PasswordValidatorAdapter implements PasswordValidator {
 	async validatePassword(password: string): Promise<void | string> {
 		if (password.length < 8) return 'minLength=8';
-		if (/[a-zA-Z0-9_!@#$%^&*-]{8,}/.test(password)) return 'regex';
+		if (!/[a-zA-Z0-9_!@#$%^&*-]{8,}/.test(password)) return 'regex';
 	}
 }
