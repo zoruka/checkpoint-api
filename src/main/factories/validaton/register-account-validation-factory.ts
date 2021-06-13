@@ -3,20 +3,24 @@ import {
 	CompositeValidation,
 	EmailValidation,
 	RequiredValidation,
+	UsernameValidation,
 } from '../../../validation/validations';
 import {
 	makeRequiredValidator,
-	makeStringValidator,
+	makeEmailValidator,
+	makeUsernameValidator,
 } from '../infras/validator-factory';
 
 export const makeRegisterAccountValidation = (): Validation => {
-	const stringValidator = makeStringValidator();
+	const emailValidator = makeEmailValidator();
+	const usernameValidator = makeUsernameValidator();
 	const requiredValidator = makeRequiredValidator();
 
 	return new CompositeValidation([
-		new EmailValidation(stringValidator, 'email'),
+		new EmailValidation(emailValidator, 'email'),
 		new RequiredValidation(requiredValidator, 'email'),
 
+		new UsernameValidation(usernameValidator, 'username'),
 		new RequiredValidation(requiredValidator, 'username'),
 
 		new RequiredValidation(requiredValidator, 'password'),

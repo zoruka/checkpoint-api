@@ -2,7 +2,7 @@ import { EmailValidator, UsernameValidator } from '../../validation/protocols';
 
 import validator from 'validator';
 
-export class StringValidatorAdapter implements EmailValidator {
+export class EmailValidatorAdapter implements EmailValidator {
 	async validateEmail(email: string): Promise<void | string> {
 		if (!validator.isEmail(email)) return 'invalid';
 	}

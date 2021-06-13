@@ -1,12 +1,18 @@
 import {
 	RequiredValidatorAdapter,
-	StringValidatorAdapter,
+	EmailValidatorAdapter,
+	UsernameValidatorAdapter,
 } from '../../../infra/validator';
+import { UsernameValidator } from '../../../validation/protocols';
 
-export const makeStringValidator = (): StringValidatorAdapter => {
-	return new StringValidatorAdapter();
+export const makeEmailValidator = (): EmailValidatorAdapter => {
+	return new EmailValidatorAdapter();
 };
 
 export const makeRequiredValidator = (): RequiredValidatorAdapter => {
 	return new RequiredValidatorAdapter();
+};
+
+export const makeUsernameValidator = (): UsernameValidator => {
+	return new UsernameValidatorAdapter();
 };
