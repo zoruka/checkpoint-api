@@ -16,6 +16,6 @@ export class CompositeValidation implements Validation {
 			}
 		}
 
-		if (Object.keys(result)) return result;
+		if (Object.keys(result).length) return result;
 	}
 }
