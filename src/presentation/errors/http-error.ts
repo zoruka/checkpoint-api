@@ -5,6 +5,7 @@ import { Validation } from '../protocols/validation';
 export namespace HttpError {
 	abstract class HttpError extends IdentifiedError implements Http.Response {
 		body: any;
+		passing?: IdentifiedError;
 
 		constructor(
 			public readonly statusCode: number,
@@ -20,9 +21,12 @@ export namespace HttpError {
 		}
 
 		pass(e: IdentifiedError): HttpError {
-			this.message = e.message;
-			this.name = e.name;
-			this.type = e.type;
+			this.passing = e;
+			this.body = {
+				...this.body,
+				type: e.name,
+				message: e.message,
+			};
 			return this;
 		}
 	}
