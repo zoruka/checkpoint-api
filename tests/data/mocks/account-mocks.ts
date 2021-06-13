@@ -1,12 +1,13 @@
 import {
 	AddAccountRepository,
+	FetchAccountsRepository,
 	FindAccountByEmailRepository,
 	FindAccountByUsernameRepository,
 	FindAccountRepository,
 	UpdateAccountRepository,
 } from '../../../src/data/protocols/database';
 import { datatype } from 'faker';
-import { mockAccount } from '../../domain/mocks/account';
+import { mockAccount, mockAccountShort } from '../../domain/mocks/account';
 
 export class AddAccountRepositorySpy implements AddAccountRepository {
 	result?: AddAccountRepository.Result;
@@ -66,6 +67,15 @@ export class FindAccountByUsernameRepositorySpy
 		username: FindAccountByUsernameRepository.Params
 	): Promise<FindAccountByUsernameRepository.Result> {
 		this.result = mockAccount({ username });
+		return this.result;
+	}
+}
+
+export class FetchAccountsRepositorySpy implements FetchAccountsRepository {
+	result?: FetchAccountsRepository.Result;
+
+	async fetchIds(): Promise<FetchAccountsRepository.Result> {
+		this.result = [mockAccountShort()];
 		return this.result;
 	}
 }

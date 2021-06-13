@@ -1,4 +1,4 @@
-import { datatype, system, internet, name, random } from 'faker';
+import { system, internet, name, random } from 'faker';
 import { Account } from '../../../src/domain/models';
 import { AddAccount } from '../../../src/domain/usecases';
 
@@ -24,5 +24,13 @@ export const mockAddAccountParams = (
 	email: params.email || internet.email(),
 	name: params.name || name.findName(),
 	password: params.password || random.alphaNumeric(32),
+	username: params.username || name.firstName(),
+});
+
+export const mockAccountShort = (
+	params: Partial<Account.Short> = {}
+): Account.Short => ({
+	id: params.id || random.alphaNumeric(24),
+	name: params.name || name.findName(),
 	username: params.username || name.firstName(),
 });
