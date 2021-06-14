@@ -4,6 +4,7 @@ import {
 	BinderGroupRepository,
 	FindGroupBindingRepository,
 	FindGroupByIdRepository,
+	FindGroupsByAccountRepository,
 	FindGroupsRepository,
 	GenerateGroupTagRepository,
 	UpdateGroupRepository,
@@ -82,6 +83,17 @@ export class UpdateGroupRepositorySpy implements UpdateGroupRepository {
 
 	async update(): Promise<UpdateGroupRepository.Result> {
 		this.result = mockGroup();
+		return this.result;
+	}
+}
+
+export class FindGroupsByAccountRepositorySpy
+	implements FindGroupsByAccountRepository
+{
+	result?: FindGroupsByAccountRepository.Result;
+
+	async findByAccount(): Promise<FindGroupsByAccountRepository.Result> {
+		this.result = [mockGroup()];
 		return this.result;
 	}
 }
