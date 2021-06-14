@@ -8,7 +8,9 @@ import {
 	BinderGroupRepository,
 	UpdateGroupRepository,
 	GenerateGroupTagRepository,
+	FindGroupsByAccountRepository,
 } from '../../../../data/protocols';
+import { Group } from '../../../../domain/models';
 import { FindGroups } from '../../../../domain/usecases';
 import { MongoHelper } from '../mongo-helper';
 
@@ -21,7 +23,8 @@ export class MongoGroupRepository
 		FindGroupBindingRepository,
 		FindGroupByIdRepository,
 		UpdateGroupRepository,
-		GenerateGroupTagRepository
+		GenerateGroupTagRepository,
+		FindGroupsByAccountRepository
 {
 	async add(
 		params: AddGroupRepository.Params
@@ -132,5 +135,30 @@ export class MongoGroupRepository
 		);
 		const length = await bindingsCollection.countDocuments();
 		return `000000${length}`.slice(-6);
+	}
+
+	async findByAccount(
+		accountId: FindGroupsByAccountRepository.Params
+	): Promise<FindGroupsByAccountRepository.Result> {
+		const bindingsCollection = await MongoHelper.getCollection(
+			'group-bindings'
+		);
+
+		const bindings = await bindingsCollection
+			.find({
+				[`accounts.${accountId}`]: {
+					$ne: null,
+					$exists: true,
+				},
+			})
+			.toArray();
+
+		const groups: Group.Model[] = [];
+		for (const binding of bindings) {
+			const group = await this.findById(binding.groupId);
+			if (group) groups.push(group);
+		}
+
+		return groups;
 	}
 }
