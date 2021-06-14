@@ -13,13 +13,10 @@ export const applyAccountRoutes = (router: Router): void => {
 	router.post('/register', adaptRoute(makeRegisterAccountController()));
 	router.post('/auth', adaptRoute(makeAuthAccountController()));
 	router.get('/account/:id', adaptRoute(makeFindAccountController()));
-	router.put(
-		'/account',
-		profileAuth,
-		adaptRoute(makeUpdateAccountController())
-	);
+
+	router.put('/me', profileAuth, adaptRoute(makeUpdateAccountController()));
 	router.get(
-		'/account/groups',
+		'/me/groups',
 		profileAuth,
 		adaptRoute(makeFindAccountGroupsController())
 	);
