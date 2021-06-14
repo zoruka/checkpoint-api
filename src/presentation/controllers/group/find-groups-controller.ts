@@ -18,7 +18,7 @@ export class FindGroupsController implements Http.Controller {
 			const badParams = await this.validation.validate(request);
 			if (badParams) return new HttpError.BadRequest(badParams);
 
-			const group = await this.findGroups.find(request.search);
+			const group = await this.findGroups.find(request.search || '');
 
 			return ok(group);
 		} catch (e) {
@@ -33,7 +33,7 @@ export class FindGroupsController implements Http.Controller {
 
 export namespace FindGroupsController {
 	export type Request = {
-		search: string;
+		search?: string;
 	};
 	export type Response = Group.Model[];
 }
