@@ -5,7 +5,7 @@ import {
 } from '../../../validation/validations';
 import { makeRequiredValidator } from '../infras';
 
-export const makeFindGroupAccounts = (): Validation => {
+export const makeFindGroupAccountsValidation = (): Validation => {
 	const requiredValidator = makeRequiredValidator();
 
 	return new CompositeValidation([
