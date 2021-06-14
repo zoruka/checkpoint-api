@@ -54,6 +54,15 @@ export class DbUpdateAccount implements UpdateAccount {
 			password: newPassword || currentAccount.password,
 			name: params.name || currentAccount.name,
 			updatedAt: new Date(),
+
+			twitch:
+				params.twitch !== undefined
+					? params.twitch
+					: currentAccount.twitch,
+			steam:
+				params.steam !== undefined
+					? params.steam
+					: currentAccount.steam,
 		});
 	}
 }

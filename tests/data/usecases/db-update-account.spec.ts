@@ -55,6 +55,8 @@ describe('DbUpdateAccount', () => {
 		name: name.findName(),
 		username: internet.userName(),
 		password: internet.password(),
+		twitch: 'twitch',
+		steam: 'steam',
 	};
 
 	afterAll(() => {

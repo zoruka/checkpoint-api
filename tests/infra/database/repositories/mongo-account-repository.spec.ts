@@ -131,6 +131,8 @@ describe('MongoAccountRepository', () => {
 				name: 'new_name',
 				password: 'new_password',
 				username: 'new_username',
+				twitch: 'twitch',
+				steam: 'steam',
 			});
 
 			expect(updatedAccount.id).toEqual(insertedId);

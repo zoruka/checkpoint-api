@@ -14,6 +14,9 @@ export const mockAccount = (
 	password: params.password || random.alphaNumeric(32),
 	updatedAt: params.updatedAt || new Date(),
 	username: params.username || name.firstName(),
+	twitch: params.twitch || 'twitch',
+	steam: params.steam || 'steam',
+	level: 0,
 });
 
 export const mockAddAccountParams = (
@@ -25,6 +28,9 @@ export const mockAddAccountParams = (
 	name: params.name || name.findName(),
 	password: params.password || random.alphaNumeric(32),
 	username: params.username || name.firstName(),
+	twitch: params.twitch || 'twitch',
+	steam: params.steam || 'steam',
+	level: 0,
 });
 
 export const mockAccountShort = (

@@ -12,6 +12,9 @@ export namespace UpdateAccount {
 		username?: string;
 		password?: string;
 		name?: string;
+
+		twitch?: string | null;
+		steam?: string | null;
 	};
 
 	export type Result = Account.Model;

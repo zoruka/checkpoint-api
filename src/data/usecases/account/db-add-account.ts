@@ -39,6 +39,9 @@ export class DbAddAccount implements AddAccount {
 			avatarPath: null,
 			createdAt: date,
 			updatedAt: date,
+			level: 0,
+			steam: params.steam,
+			twitch: params.twitch,
 		});
 	}
 }

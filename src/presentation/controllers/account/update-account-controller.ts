@@ -24,6 +24,8 @@ export class UpdateAccountController implements Http.Controller {
 				name: request.name,
 				password: request.password,
 				username: request.username,
+				twitch: request.twitch,
+				steam: request.steam,
 			});
 
 			return ok(result);
@@ -45,6 +47,8 @@ export namespace UpdateAccountController {
 		username?: string;
 		password?: string;
 		name?: string;
+		twitch?: string;
+		steam?: string;
 	};
 
 	export type Response = Omit<Account.Model, 'password'>;

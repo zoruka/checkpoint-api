@@ -28,6 +28,7 @@ export class RegisterAccountController implements Http.Controller {
 				...request,
 				access: Account.Access.Profile,
 				avatarPath: null,
+				level: 0,
 			});
 		} catch (e) {
 			if (e instanceof IdentifiedError) {
@@ -60,6 +61,8 @@ export namespace RegisterAccountController {
 		name: string;
 		password: string;
 		email: string;
+		steam: string | null;
+		twitch: string | null;
 	};
 
 	export type Response = Auth.Result;

@@ -49,6 +49,9 @@ const addParams = {
 	name: name.findName(),
 	username: internet.userName(),
 	password: internet.password(),
+	twitch: 'twitch',
+	steam: 'steam',
+	level: 0,
 };
 
 describe('DbAddAccount', () => {
@@ -143,6 +146,9 @@ describe('DbAddAccount', () => {
 			avatarPath: null,
 			createdAt: new Date(),
 			updatedAt: new Date(),
+			twitch: addParams.twitch,
+			steam: addParams.steam,
+			level: addParams.level,
 		});
 
 		jest.useRealTimers();

@@ -27,6 +27,8 @@ describe('RegisterAccountController', () => {
 		name: 'name',
 		password: 'password',
 		email: 'mail@mail.com',
+		steam: 'steam',
+		twitch: 'twitch',
 	};
 
 	test('should return BadRequest if has bad params', async () => {

@@ -13,6 +13,10 @@ export namespace Account {
 		email: string;
 		name: string;
 		avatarPath: string | null;
+		level: number;
+
+		twitch: string | null;
+		steam: string | null;
 	}
 
 	export type Short = Pick<Account.Model, 'name' | 'username' | 'id'>;

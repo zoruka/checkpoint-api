@@ -24,6 +24,8 @@ export const makeRegisterAccountValidation = (): Validation => {
 		new RequiredValidation(requiredValidator, 'username'),
 		new RequiredValidation(requiredValidator, 'password'),
 		new RequiredValidation(requiredValidator, 'name'),
+		new RequiredValidation(requiredValidator, 'steam'),
+		new RequiredValidation(requiredValidator, 'twitch'),
 
 		new EmailValidation(emailValidator, 'email'),
 		new UsernameValidation(usernameValidator, 'username'),
