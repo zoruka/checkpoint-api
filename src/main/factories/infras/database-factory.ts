@@ -1,6 +1,7 @@
 import {
 	MongoAccountRepository,
 	MongoGroupRepository,
+	MongoPostRepository,
 } from '../../../infra/database';
 
 export const makeMongoAccountRepository = (): MongoAccountRepository => {
@@ -9,4 +10,8 @@ export const makeMongoAccountRepository = (): MongoAccountRepository => {
 
 export const makeMongoGroupRepository = (): MongoGroupRepository => {
 	return new MongoGroupRepository();
+};
+
+export const makeMongoPostRepository = (): MongoPostRepository => {
+	return new MongoPostRepository();
 };

@@ -9,3 +9,5 @@ export * from './find-group-by-id-validation-factory';
 export * from './register-group-validation-factory';
 export * from './find-group-accounts-validation';
 export * from './find-groups-validation-factory';
+
+export * from './add-post-validation-factory';
