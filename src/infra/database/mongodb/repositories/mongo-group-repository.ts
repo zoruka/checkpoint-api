@@ -28,6 +28,15 @@ export class MongoGroupRepository
 	): Promise<AddGroupRepository.Result> {
 		const accountCollection = await MongoHelper.getCollection('groups');
 		const result = await accountCollection.insertOne(params);
+		const bindingsCollection = await MongoHelper.getCollection(
+			'group-bindings'
+		);
+
+		await bindingsCollection.findOneAndUpdate(
+			{ _id: params.bindingId },
+			{ $set: { groupId: result.insertedId } }
+		);
+
 		return {
 			...params,
 			id: result.insertedId,

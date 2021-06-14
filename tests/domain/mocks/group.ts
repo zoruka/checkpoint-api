@@ -21,4 +21,5 @@ export const mockGroupBinding = (
 		[random.alphaNumeric(25)]: new Date(),
 		[random.alphaNumeric(25)]: null,
 	},
+	groupId: params.groupId || random.alphaNumeric(24),
 });

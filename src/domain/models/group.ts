@@ -2,6 +2,7 @@ import { DatabaseDocument } from './database-document';
 
 export namespace Group {
 	export interface Binding extends DatabaseDocument.Record {
+		groupId: string;
 		accounts: {
 			[userId: string]: Date | string | null;
 		};
