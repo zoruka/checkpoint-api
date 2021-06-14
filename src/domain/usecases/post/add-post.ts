@@ -8,7 +8,7 @@ export namespace AddPost {
 	export type Params = {
 		text: string;
 		media?: string;
-		userId: string;
+		accountId: string;
 		groupId: string;
 	};
 
