@@ -17,7 +17,7 @@ const makeSut = () => {
 
 describe('FindAccountController', () => {
 	const request = {
-		id: 'account_id',
+		accountId: 'account_id',
 	};
 
 	test('should return BadRequest if has bad params', async () => {
