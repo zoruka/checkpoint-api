@@ -28,7 +28,11 @@ export class DbFindGroupPosts implements FindGroupPosts {
 
 			if (account) {
 				result.push({
-					account,
+					account: {
+						id: account.id,
+						name: account.name,
+						username: account.username,
+					},
 					...post,
 				});
 			}

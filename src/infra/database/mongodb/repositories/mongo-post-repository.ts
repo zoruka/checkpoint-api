@@ -22,7 +22,7 @@ export class MongoPostRepository
 		groupId: FindPostsByGroupRepository.Params
 	): Promise<FindPostsByGroupRepository.Result> {
 		const postsCollection = await MongoHelper.getCollection('posts');
-		const result = await postsCollection.find({ groupId }).toArray();
-		return result;
+		const posts = await postsCollection.find({ groupId }).toArray();
+		return posts.map((post) => MongoHelper.map(post));
 	}
 }
