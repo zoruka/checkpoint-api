@@ -7,3 +7,4 @@ export * from './bind-group-account-validation-factory';
 export * from './find-group-by-id-validation-factory';
 export * from './register-group-validation-factory';
 export * from './find-group-accounts-validation';
+export * from './find-groups-validation-factory';

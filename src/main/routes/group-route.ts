@@ -6,6 +6,7 @@ import {
 	makeRegisterGroupController,
 	makeFindGroupAccountsController,
 } from '../factories/controllers';
+import { makeFindGroupsController } from '../factories/controllers/group/find-groups-controller-factory';
 import { profileAuth } from '../middlewares/profile-auth';
 
 export const applyGroupRoutes = (router: Router): void => {
@@ -29,4 +30,5 @@ export const applyGroupRoutes = (router: Router): void => {
 		profileAuth,
 		adaptRoute(makeFindGroupAccountsController())
 	);
+	router.get('/groups', profileAuth, adaptRoute(makeFindGroupsController()));
 };
