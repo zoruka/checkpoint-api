@@ -9,6 +9,6 @@ export const makeFindAccountValidation = (): Validation => {
 	const requiredValidator = makeRequiredValidator();
 
 	return new CompositeValidation([
-		new RequiredValidation(requiredValidator, 'id'),
+		new RequiredValidation(requiredValidator, 'accountId'),
 	]);
 };

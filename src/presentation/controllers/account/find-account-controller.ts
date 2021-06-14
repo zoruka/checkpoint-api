@@ -20,7 +20,7 @@ export class FindAccountController implements Http.Controller {
 			if (badParams) return new HttpError.BadRequest(badParams);
 
 			const { password, ...result } = await this.findAccount.findOne({
-				id: request.id,
+				id: request.accountId,
 			});
 
 			return ok(result);
@@ -36,7 +36,7 @@ export class FindAccountController implements Http.Controller {
 
 export namespace FindAccountController {
 	export type Request = {
-		id: string;
+		accountId: string;
 	};
 
 	export type Response = Omit<Account.Model, 'password'>;
