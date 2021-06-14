@@ -90,15 +90,16 @@ export class MongoGroupRepository
 		return group && MongoHelper.map(group);
 	}
 
-	async find(tag: FindGroups.Params): Promise<FindGroups.Result> {
+	async find(searchValue: FindGroups.Params): Promise<FindGroups.Result> {
 		const groupsCollection = await MongoHelper.getCollection('groups');
-		const group = await groupsCollection.findOne({
-			tag,
-		});
 
-		const result: any[] = [];
-		if (group) result.push(MongoHelper.map(group));
-		return result;
+		const groups = await groupsCollection
+			.find({
+				name: new RegExp(`.*${searchValue}.*`, 'i'),
+			})
+			.toArray();
+
+		return groups.map((group) => MongoHelper.map(group));
 	}
 
 	async update({

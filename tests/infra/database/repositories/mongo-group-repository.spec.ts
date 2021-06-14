@@ -97,12 +97,31 @@ describe('MongoGroupRepository', () => {
 		});
 
 		test('should return a group by tag', async () => {
-			const { id, ...groupMocks } = mockGroup();
-			await groupsCollection.insertOne(groupMocks);
-			const sut = makeSut();
-			const groups = await sut.find(groupMocks.tag);
+			const groupMocks = [
+				mockGroup({ name: 'group_abc' }),
+				mockGroup({ name: 'group_ABC' }),
+				mockGroup({ name: 'big_strong_group' }),
+			].map(({ id, ...mock }) => mock);
 
-			expect(groups.length).toEqual(1);
+			await groupsCollection.insertMany(groupMocks);
+			const sut = makeSut();
+			const groups = await sut.find('abc');
+
+			expect(groups.length).toEqual(2);
+		});
+
+		test('should return no group', async () => {
+			const groupMocks = [
+				mockGroup({ name: 'group_abc' }),
+				mockGroup({ name: 'group_ABC' }),
+				mockGroup({ name: 'big_strong_group' }),
+			].map(({ id, ...mock }) => mock);
+
+			await groupsCollection.insertMany(groupMocks);
+			const sut = makeSut();
+			const groups = await sut.find('xxx');
+
+			expect(groups.length).toEqual(0);
 		});
 	});
 
