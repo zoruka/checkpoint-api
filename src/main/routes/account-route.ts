@@ -3,6 +3,7 @@ import { adaptRoute } from '../adapters';
 import {
 	makeAuthAccountController,
 	makeFindAccountController,
+	makeFindAccountGroupsController,
 	makeRegisterAccountController,
 	makeUpdateAccountController,
 } from '../factories/controllers';
@@ -16,5 +17,10 @@ export const applyAccountRoutes = (router: Router): void => {
 		'/account',
 		profileAuth,
 		adaptRoute(makeUpdateAccountController())
+	);
+	router.get(
+		'/account/groups',
+		profileAuth,
+		adaptRoute(makeFindAccountGroupsController())
 	);
 };
