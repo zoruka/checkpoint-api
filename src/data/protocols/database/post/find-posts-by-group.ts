@@ -1,12 +1,12 @@
 import { Post } from '../../../../domain/models';
 
-export interface FindPostRepository {
+export interface FindPostsByGroupRepository {
 	findByGroup: (
-		groupId: FindPostRepository.Params
-	) => Promise<FindPostRepository.Result>;
+		groupId: FindPostsByGroupRepository.Params
+	) => Promise<FindPostsByGroupRepository.Result>;
 }
 
-export namespace FindPostRepository {
+export namespace FindPostsByGroupRepository {
 	export type Params = string;
 	export type Result = Post.Model[];
 }
