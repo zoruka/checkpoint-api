@@ -1,5 +1,5 @@
 import { datatype, random } from 'faker';
-import { Collection } from 'mongodb';
+import { Collection, ObjectID } from 'mongodb';
 import {
 	MongoGroupRepository,
 	MongoHelper,
@@ -152,6 +152,37 @@ describe('MongoGroupRepository', () => {
 			const generatedTag = await sut.generateTag();
 
 			expect(typeof generatedTag).toEqual('string');
+		});
+	});
+
+	describe('findByAccount()', () => {
+		test('should return a group array', async () => {
+			await bindingsCollection.drop();
+			await groupsCollection.drop();
+			const sut = makeSut();
+
+			const groupId = new ObjectID();
+			const bindingId = new ObjectID();
+			const accountId = new ObjectID();
+
+			const { id: gId, ...groupMock } = mockGroup();
+			const { id: bId, ...bindingMock } = mockGroupBinding();
+
+			await groupsCollection.insertOne({
+				...groupMock,
+				_id: groupId,
+				bindingId,
+			});
+			await bindingsCollection.insertOne({
+				...bindingMock,
+				_id: bindingId,
+				groupId,
+				accounts: { [accountId.toHexString()]: new Date() },
+			});
+
+			const result = await sut.findByAccount(accountId.toHexString());
+
+			expect(result.length).toEqual(1);
 		});
 	});
 });
