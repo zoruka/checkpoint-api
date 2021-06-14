@@ -144,4 +144,31 @@ describe('MongoAccountRepository', () => {
 			expect(updatedAccount.username).toEqual('new_username');
 		});
 	});
+
+	describe('fetchIds()', () => {
+		test('should return an array of shorts', async () => {
+			const sut = makeSut();
+			const accountMocks = [
+				mockAccount(),
+				mockAccount(),
+				mockAccount(),
+			].map(({ id, ...mock }) => mock);
+
+			const insertResult = await accountCollection.insertMany(
+				accountMocks
+			);
+
+			const insertedIds = Object.values(insertResult.insertedIds);
+
+			const result = await sut.fetchIds(insertedIds);
+
+			expect(result).toMatchObject(
+				accountMocks.map((account, index) => ({
+					id: insertedIds[index],
+					name: account.name,
+					username: account.username,
+				}))
+			);
+		});
+	});
 });

@@ -1,11 +1,13 @@
 import { ObjectID } from 'mongodb';
 import {
 	AddAccountRepository,
+	FetchAccountsRepository,
 	FindAccountByEmailRepository,
 	FindAccountByUsernameRepository,
 	FindAccountRepository,
 	UpdateAccountRepository,
 } from '../../../../data/protocols';
+import { Account } from '../../../../domain/models';
 import { MongoHelper } from '../mongo-helper';
 
 export class MongoAccountRepository
@@ -14,7 +16,8 @@ export class MongoAccountRepository
 		FindAccountRepository,
 		FindAccountByEmailRepository,
 		FindAccountByUsernameRepository,
-		UpdateAccountRepository
+		UpdateAccountRepository,
+		FetchAccountsRepository
 {
 	async add(
 		params: AddAccountRepository.Params
@@ -66,5 +69,24 @@ export class MongoAccountRepository
 			{ returnOriginal: false }
 		);
 		return updatedAccount.value && MongoHelper.map(updatedAccount.value);
+	}
+
+	async fetchIds(
+		ids: FetchAccountsRepository.Params
+	): Promise<FetchAccountsRepository.Result> {
+		const accountCollection = await MongoHelper.getCollection('accounts');
+
+		const shorts: Account.Short[] = [];
+
+		for (const id of ids) {
+			const account = await accountCollection.findOne(
+				{ _id: new ObjectID(id) },
+				{ projection: { name: 1, username: 1, _id: 1 } }
+			);
+
+			if (account) shorts.push(MongoHelper.map(account));
+		}
+
+		return shorts;
 	}
 }
